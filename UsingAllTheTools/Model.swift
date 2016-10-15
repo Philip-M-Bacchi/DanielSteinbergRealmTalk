@@ -25,34 +25,48 @@ struct Card {
 struct Hand {
     
     // Properties
-    private let deck = Deck()
-    private var cards: [Card] = [Card()]
+    private var deck: Deck
+    private var cards: [Card]
     
     var numberOfCards: Int {
         return cards.count
     }
+    
+    init(deck: Deck, cards: [Card]) {
+        self.deck = deck
+        self.cards = cards
+    }
+    
+    init() {
+        self.deck = Deck()
+        self.cards = [Card()]
+    }
+    
     
     //Changing Model Functions
     func cardAtPosition(index: Int) -> Card {
         return cards[index]
     }
     
-    mutating func addNewCardAtIndex(index: Int) {
-        insert(card: deck.nextCard(), atIndex: index)
+    func addNewCard(atIndex: Int) -> Hand {
+        return insert(card: deck.nextCard(), atIndex: atIndex)
     }
     
-    private mutating func insert(card: Card, atIndex index: Int) {
-        cards.insert(card, at: index)
+    private func insert(card: Card, atIndex index: Int) -> Hand {
+        var mutableCards = cards
+        mutableCards.insert(card, at: index)
+        return Hand(deck:deck, cards: mutableCards)
     }
     
-    mutating func deleteCardAt(index: Int) {
-        cards.remove(at: index)
+    func deleteCard(atIndex: Int) -> Hand {
+        var mutableCards = cards
+        mutableCards.remove(at: atIndex)
+        return Hand(deck: deck, cards: mutableCards)
     }
     
-    mutating func moveCardFrom(index:Int, toIndex: Int) {
-        let cardToMove = cards[index]
-        deleteCardAt(index: index)
-        insert(card: cardToMove, atIndex: toIndex)
+    func moveCard(fromIndex:Int, toIndex: Int) -> Hand {
+        return deleteCard(atIndex: fromIndex).insert(card: cards[fromIndex], atIndex: toIndex)
+        //first part returns a new hand, but we still have our original, from which we can grab the card we removed and reinsert it into our new hand at the index we desire
     }
     
     
