@@ -37,17 +37,29 @@ class HandVC: UIViewController, UITableViewDataSource {
     // Other TableView Methods
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            hand.deleteCardAtIndex(index: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
+            hand.deleteCardAt(index: indexPath.row)
+            deleteRowAt(indexPath: indexPath)
         }
+    }
+    
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        hand.moveCardFrom(index: sourceIndexPath.row, toIndex: destinationIndexPath.row)
     }
     
     // Custom Methods
     @IBAction func addNewCard(_ sender: UIBarButtonItem) {
         if hand.numberOfCards < 5 {
             hand.addNewCardAtIndex(index: 0)
-            tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .fade)
+            insertTopRow()
         }
+    }
+    
+    private func insertTopRow() {
+        tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .fade)
+    }
+    
+    private func deleteRowAt(indexPath: IndexPath) {
+        tableView.deleteRows(at: [indexPath], with: .fade)
     }
 
 }

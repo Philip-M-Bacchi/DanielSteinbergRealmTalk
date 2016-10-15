@@ -45,13 +45,13 @@ class Hand {
         cards.insert(card, at: index)
     }
     
-    func deleteCardAtIndex(index: Int) {
+    func deleteCardAt(index: Int) {
         cards.remove(at: index)
     }
     
     func moveCardFrom(index:Int, toIndex: Int) {
         let cardToMove = cards[index]
-        deleteCardAtIndex(index: index)
+        deleteCardAt(index: index)
         insert(card: cardToMove, atIndex: toIndex)
     }
     
