@@ -8,18 +8,11 @@
 
 import UIKit
 
-struct Deck {
-    // Some Deck Model
-    func nextCard() -> Card {
-        return Card()
-    }
-}
-
-struct Card {
-   // Some Card Model
-    let color: UIColor = .red
-    let rank: String = "Ace"
-    let suit: String = "Hearts"
+protocol DataType {
+    var numberOfItems: Int { get }
+    func addNewItem(atIndex: Int) -> Self
+    func deleteItem(atIndex: Int) -> Self
+    func moveItem(fromIndex: Int, toIndex: Int) -> Self
 }
 
 struct Hand: DataType {
@@ -73,6 +66,19 @@ struct Hand: DataType {
         return deleteItem(atIndex: fromIndex).insert(card: cards[fromIndex], atIndex: toIndex)
         //first part returns a new hand, but we still have our original, from which we can grab the card we removed and reinsert it into our new hand at the index we desire
     }
-    
-    
+
+}
+
+struct Deck {
+    // Some Deck Model
+    func nextCard() -> Card {
+        return Card()
+    }
+}
+
+struct Card {
+    // Some Card Model
+    let color: UIColor = .red
+    let rank: String = "Ace"
+    let suit: String = "Hearts"
 }

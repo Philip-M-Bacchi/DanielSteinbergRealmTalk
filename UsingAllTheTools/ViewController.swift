@@ -11,7 +11,7 @@ import UIKit
 class HandVC: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
-    private var dataSource = DataSource()
+    private var dataSource = HandDataSource()
         
     override func viewDidLoad() {
         super.viewDidLoad()

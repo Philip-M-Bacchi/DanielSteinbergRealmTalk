@@ -16,7 +16,7 @@
 		22210FD51DB1D37300C1E841 /* CardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22210FD31DB1D37300C1E841 /* CardCell.swift */; };
 		22210FD61DB1D37300C1E841 /* CardCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22210FD41DB1D37300C1E841 /* CardCell.xib */; };
 		22210FD91DB1D80100C1E841 /* DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22210FD81DB1D80100C1E841 /* DataSource.swift */; };
-		22210FDB1DB1DF8D00C1E841 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22210FDA1DB1DF8D00C1E841 /* Protocols.swift */; };
+		22210FDD1DB1E75F00C1E841 /* HandDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22210FDC1DB1E75F00C1E841 /* HandDataSource.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,7 +31,7 @@
 		22210FD31DB1D37300C1E841 /* CardCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardCell.swift; sourceTree = "<group>"; };
 		22210FD41DB1D37300C1E841 /* CardCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CardCell.xib; sourceTree = "<group>"; };
 		22210FD81DB1D80100C1E841 /* DataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSource.swift; sourceTree = "<group>"; };
-		22210FDA1DB1DF8D00C1E841 /* Protocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Protocols.swift; path = ../Protocols.swift; sourceTree = "<group>"; };
+		22210FDC1DB1E75F00C1E841 /* HandDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HandDataSource.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,9 +64,8 @@
 		22210FBD1DB1C1B200C1E841 /* UsingAllTheTools */ = {
 			isa = PBXGroup;
 			children = (
-				22210FDA1DB1DF8D00C1E841 /* Protocols.swift */,
 				22210FD01DB1C37800C1E841 /* Model.swift */,
-				22210FD81DB1D80100C1E841 /* DataSource.swift */,
+				22210FDE1DB1E77500C1E841 /* DataSources */,
 				22210FD71DB1D37A00C1E841 /* View */,
 				22210FC01DB1C1B200C1E841 /* ViewController.swift */,
 				22210FC21DB1C1B200C1E841 /* Main.storyboard */,
@@ -93,6 +92,15 @@
 				22210FD41DB1D37300C1E841 /* CardCell.xib */,
 			);
 			name = View;
+			sourceTree = "<group>";
+		};
+		22210FDE1DB1E77500C1E841 /* DataSources */ = {
+			isa = PBXGroup;
+			children = (
+				22210FD81DB1D80100C1E841 /* DataSource.swift */,
+				22210FDC1DB1E75F00C1E841 /* HandDataSource.swift */,
+			);
+			name = DataSources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -172,8 +180,8 @@
 				22210FC11DB1C1B200C1E841 /* ViewController.swift in Sources */,
 				22210FBF1DB1C1B200C1E841 /* AppDelegate.swift in Sources */,
 				22210FD11DB1C37800C1E841 /* Model.swift in Sources */,
-				22210FDB1DB1DF8D00C1E841 /* Protocols.swift in Sources */,
 				22210FD91DB1D80100C1E841 /* DataSource.swift in Sources */,
+				22210FDD1DB1E75F00C1E841 /* HandDataSource.swift in Sources */,
 				22210FD51DB1D37300C1E841 /* CardCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

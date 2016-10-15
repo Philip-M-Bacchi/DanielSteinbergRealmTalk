@@ -8,11 +8,41 @@
 
 import UIKit
 
+protocol SourceType: UITableViewDataSource {
+    var dataObject: DataType { get set }
+    var conditionForAdding: Bool { get }
+    
+    func insertTopRowIn(tableView: UITableView)
+    func deleteRowAt(IndexPath: IndexPath, from tableView: UITableView)
+}
+
+extension SourceType {
+    func insertTopRowIn(tableView: UITableView) {
+        tableView.insertRows(at: [IndexPath.init(row: 0, section: 0)], with: .fade)
+    }
+    
+    func deleteRowAt(IndexPath: IndexPath, from tableView: UITableView) {
+        tableView.deleteRows(at: [IndexPath], with: .fade)
+    }
+    
+    public func addItemTo(_ tableView: UITableView) {
+        if conditionForAdding {
+            dataObject = dataObject.addNewItem(atIndex: 0)
+            insertTopRowIn(tableView: tableView)
+        }
+    }
+}
+
+
 class DataSource: NSObject, UITableViewDataSource, SourceType {
     
-    var dataObject: DataType = Hand()
+    init(dataObject: DataType) {
+        self.dataObject = dataObject
+    }
+    
+    var dataObject: DataType
     var conditionForAdding: Bool {
-        return dataObject.numberOfItems < 5
+        return false // You will never be able to add anything unless your subclass overrides. Nice!
     }
     
     // Data Source Methods
@@ -21,17 +51,7 @@ class DataSource: NSObject, UITableViewDataSource, SourceType {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        tableView.register(UINib.init(nibName: "CardCell", bundle: Bundle.main), forCellReuseIdentifier: "cardCell")
-
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cardCell", for: indexPath) as? CardCell else {
-            fatalError("We've got a problem buddy.")
-        }
-        guard let hand = dataObject as? Hand else {
-            fatalError("Could not create Card Cell or Hand Instance")
-        }
-        
-        cell.fillWith(card: hand[indexPath.row])
-        return cell
+        fatalError("The subclass must implement this function")
     }
     
     // Other TableView Methods
@@ -47,7 +67,4 @@ class DataSource: NSObject, UITableViewDataSource, SourceType {
         dataObject = dataObject.moveItem(fromIndex: sourceIndexPath.row, toIndex: destinationIndexPath.row)
     }
 
-
-
-    
 }
