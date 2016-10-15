@@ -19,6 +19,8 @@ class DataSource: NSObject, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
+        tableView.register(UINib.init(nibName: "CardCell", bundle: Bundle.main), forCellReuseIdentifier: "cardCell")
+
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "cardCell", for: indexPath) as? CardCell else {
             fatalError("We've got a problem buddy.")
         }
@@ -38,7 +40,7 @@ class DataSource: NSObject, UITableViewDataSource {
         hand = hand.moveCard(fromIndex: sourceIndexPath.row, toIndex: destinationIndexPath.row)
     }
 
-    // Abstraction Methods
+    // Abstraction Method
     public func addItemTo(_ tableView: UITableView) {
         if hand.numberOfCards < 5 {
             hand = hand.addNewCard(atIndex: 0)
