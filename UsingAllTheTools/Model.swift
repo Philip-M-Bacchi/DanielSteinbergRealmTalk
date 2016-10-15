@@ -8,21 +8,21 @@
 
 import UIKit
 
-class Deck {
+struct Deck {
     // Some Deck Model
     func nextCard() -> Card {
         return Card()
     }
 }
 
-class Card {
+struct Card {
    // Some Card Model
     let color: UIColor = .red
     let rank: String = "Ace"
     let suit: String = "Hearts"
 }
 
-class Hand {
+struct Hand {
     
     // Properties
     private let deck = Deck()
@@ -37,19 +37,19 @@ class Hand {
         return cards[index]
     }
     
-    func addNewCardAtIndex(index: Int) {
+    mutating func addNewCardAtIndex(index: Int) {
         insert(card: deck.nextCard(), atIndex: index)
     }
     
-    private func insert(card: Card, atIndex index: Int) {
+    private mutating func insert(card: Card, atIndex index: Int) {
         cards.insert(card, at: index)
     }
     
-    func deleteCardAt(index: Int) {
+    mutating func deleteCardAt(index: Int) {
         cards.remove(at: index)
     }
     
-    func moveCardFrom(index:Int, toIndex: Int) {
+    mutating func moveCardFrom(index:Int, toIndex: Int) {
         let cardToMove = cards[index]
         deleteCardAt(index: index)
         insert(card: cardToMove, atIndex: toIndex)

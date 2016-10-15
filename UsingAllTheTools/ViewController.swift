@@ -12,7 +12,7 @@ class HandVC: UIViewController, UITableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView!
     
-    private let hand = Hand()
+    private var hand = Hand()
     
     override func viewDidLoad() {
         super.viewDidLoad()
