@@ -30,8 +30,7 @@ class HandVC: UIViewController, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "cardCell", for: indexPath) as? CardCell else {
             fatalError("We've got a problem buddy.")
         }
-        
-        cell.fillWith(card: hand.card(atIndex: indexPath.row))
+        cell.fillWith(card: hand[indexPath.row])
         return cell
     }
     

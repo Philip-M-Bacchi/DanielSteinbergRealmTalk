@@ -32,6 +32,12 @@ struct Hand {
         return cards.count
     }
     
+    // Subscript
+    subscript(index: Int) -> Card {
+        return cards[index]
+    }
+    
+    // Initializers
     init(deck: Deck, cards: [Card]) {
         self.deck = deck
         self.cards = cards
