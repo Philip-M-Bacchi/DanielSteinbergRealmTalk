@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DataSource: NSObject, UITableViewDataSource {
+class DataSource: NSObject, UITableViewDataSource, SourceType {
     
     private var hand = Hand()
     
@@ -18,7 +18,6 @@ class DataSource: NSObject, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         tableView.register(UINib.init(nibName: "CardCell", bundle: Bundle.main), forCellReuseIdentifier: "cardCell")
 
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "cardCell", for: indexPath) as? CardCell else {
@@ -30,9 +29,10 @@ class DataSource: NSObject, UITableViewDataSource {
     
     // Other TableView Methods
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        
         if editingStyle == .delete {
             hand = hand.deleteCard(atIndex: indexPath.row)
-            deleteRowIn(tableView: tableView, atIndexPath: indexPath)
+            deleteRowAt(IndexPath: indexPath, from: tableView)
         }
     }
     
@@ -47,13 +47,6 @@ class DataSource: NSObject, UITableViewDataSource {
             insertTopRowIn(tableView: tableView)
         }
     }
-    
-    private func insertTopRowIn(tableView: UITableView) {
-        tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .fade)
-    }
-    
-    private func deleteRowIn(tableView: UITableView, atIndexPath: IndexPath) {
-        tableView.deleteRows(at: [atIndexPath], with: .fade)
-    }
+
     
 }
