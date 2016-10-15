@@ -44,8 +44,8 @@ struct Hand {
     
     
     //Changing Model Functions
-    func cardAtPosition(index: Int) -> Card {
-        return cards[index]
+    func card(atIndex: Int) -> Card {
+        return cards[atIndex]
     }
     
     func addNewCard(atIndex: Int) -> Hand {

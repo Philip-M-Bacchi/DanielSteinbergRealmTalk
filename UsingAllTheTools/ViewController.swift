@@ -26,11 +26,12 @@ class HandVC: UIViewController, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cardCell", for: indexPath)
-        let card = hand.cardAtPosition(index: indexPath.row)
-        cell.textLabel?.text = card.rank.description
-        cell.textLabel?.textColor = card.color
-        cell.detailTextLabel?.text = card.suit.description
+        
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cardCell", for: indexPath) as? CardCell else {
+            fatalError("We've got a problem buddy.")
+        }
+        
+        cell.fillWith(card: hand.card(atIndex: indexPath.row))
         return cell
     }
     
