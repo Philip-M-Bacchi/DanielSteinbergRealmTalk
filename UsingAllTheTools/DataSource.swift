@@ -11,6 +11,9 @@ import UIKit
 class DataSource: NSObject, UITableViewDataSource, SourceType {
     
     var dataObject: DataType = Hand()
+    var conditionForAdding: Bool {
+        return dataObject.numberOfItems < 5
+    }
     
     // Data Source Methods
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -44,13 +47,7 @@ class DataSource: NSObject, UITableViewDataSource, SourceType {
         dataObject = dataObject.moveItem(fromIndex: sourceIndexPath.row, toIndex: destinationIndexPath.row)
     }
 
-    // Abstraction Method
-    public func addItemTo(_ tableView: UITableView) {
-        if dataObject.numberOfItems < 5 {
-            dataObject = dataObject.addNewItem(atIndex: 0)
-            insertTopRowIn(tableView: tableView)
-        }
-    }
+
 
     
 }
