@@ -10,11 +10,11 @@ import UIKit
 
 class DataSource: NSObject, UITableViewDataSource, SourceType {
     
-    private var hand = Hand()
+    var dataObject: DataType = Hand()
     
     // Data Source Methods
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return hand.numberOfCards
+        return dataObject.numberOfItems
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -23,6 +23,10 @@ class DataSource: NSObject, UITableViewDataSource, SourceType {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "cardCell", for: indexPath) as? CardCell else {
             fatalError("We've got a problem buddy.")
         }
+        guard let hand = dataObject as? Hand else {
+            fatalError("Could not create Card Cell or Hand Instance")
+        }
+        
         cell.fillWith(card: hand[indexPath.row])
         return cell
     }
@@ -31,19 +35,19 @@ class DataSource: NSObject, UITableViewDataSource, SourceType {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         
         if editingStyle == .delete {
-            hand = hand.deleteCard(atIndex: indexPath.row)
+            dataObject = dataObject.deleteItem(atIndex: indexPath.row)
             deleteRowAt(IndexPath: indexPath, from: tableView)
         }
     }
     
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        hand = hand.moveCard(fromIndex: sourceIndexPath.row, toIndex: destinationIndexPath.row)
+        dataObject = dataObject.moveItem(fromIndex: sourceIndexPath.row, toIndex: destinationIndexPath.row)
     }
 
     // Abstraction Method
     public func addItemTo(_ tableView: UITableView) {
-        if hand.numberOfCards < 5 {
-            hand = hand.addNewCard(atIndex: 0)
+        if dataObject.numberOfItems < 5 {
+            dataObject = dataObject.addNewItem(atIndex: 0)
             insertTopRowIn(tableView: tableView)
         }
     }

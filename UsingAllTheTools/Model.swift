@@ -22,13 +22,13 @@ struct Card {
     let suit: String = "Hearts"
 }
 
-struct Hand {
+struct Hand: DataType {
     
     // Properties
     private var deck: Deck
     private var cards: [Card]
     
-    var numberOfCards: Int {
+    var numberOfItems: Int {
         return cards.count
     }
     
@@ -46,15 +46,14 @@ struct Hand {
     init() {
         self.deck = Deck()
         self.cards = [Card()]
-    }
-    
+    }    
     
     //Changing Model Functions
     func card(atIndex: Int) -> Card {
         return cards[atIndex]
     }
     
-    func addNewCard(atIndex: Int) -> Hand {
+    func addNewItem(atIndex: Int) -> Hand {
         return insert(card: deck.nextCard(), atIndex: atIndex)
     }
     
@@ -64,14 +63,14 @@ struct Hand {
         return Hand(deck:deck, cards: mutableCards)
     }
     
-    func deleteCard(atIndex: Int) -> Hand {
+    func deleteItem(atIndex: Int) -> Hand {
         var mutableCards = cards
         mutableCards.remove(at: atIndex)
         return Hand(deck: deck, cards: mutableCards)
     }
     
-    func moveCard(fromIndex:Int, toIndex: Int) -> Hand {
-        return deleteCard(atIndex: fromIndex).insert(card: cards[fromIndex], atIndex: toIndex)
+    func moveItem(fromIndex:Int, toIndex: Int) -> Hand {
+        return deleteItem(atIndex: fromIndex).insert(card: cards[fromIndex], atIndex: toIndex)
         //first part returns a new hand, but we still have our original, from which we can grab the card we removed and reinsert it into our new hand at the index we desire
     }
     
